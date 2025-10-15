@@ -171,7 +171,7 @@ function resolveEditableElementFromTextNode(node){
 
 function enableTextEditing(){
 
-  if (localStorage.getItem('featureEnabled') === 'false') {
+  if (localStorage.getItem('featureEnabled') === 'true') {
     alert("Feature is disabled. Editing is not allowed.");
     return false;
   }
@@ -234,7 +234,7 @@ function onMutations(records){
 ========================================================= */
 function updateOriginalHTMLWithTextChanges(){
 
-  if (localStorage.getItem('featureEnabled') === 'false') {
+  if (localStorage.getItem('featureEnabled') === 'true') {
     alert("Feature is disabled");
     return false;
   }
@@ -363,7 +363,7 @@ function applyTextUpdate(target,newText){
    SAVE CHANGES TO GITHUB 
 ========================================================= */
 async function saveAndPushChanges() {
-  if (localStorage.getItem('featureEnabled') === 'false') {
+  if (localStorage.getItem('featureEnabled') === 'true') {
     alert("Feature is disabled. Editing is not allowed.");
     return false;
   }
