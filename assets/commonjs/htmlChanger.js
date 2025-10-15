@@ -433,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
     alert("Feature is disabled");
     return false;
   }
+  console.log("feature enable from github website"+localStorage.getItem('featureEnabled'))
     createButtons();
 });
 
@@ -502,3 +503,4 @@ function createButton(text, id, clickHandler) {
 
     return button;
 }
+
