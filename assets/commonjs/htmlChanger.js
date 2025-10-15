@@ -1,3 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
    CONFIG
 ========================================================= */
@@ -143,7 +161,7 @@ let modifiedHTML=null;
 fetch(window.location.href,{cache:"no-store"})
  .then(r=>r.text())
  .then(html=>{ originalHTML=html; DEBUG&&console.log("✅ Original HTML loaded."); })
- .catch(err=>console.error(" Error loading original HTML:",err));
+ .catch(err=>console.error("❌ Error loading original HTML:",err));
 
 /* =========================================================
    EDIT MODE + CHANGE CAPTURE (MutationObserver)
@@ -171,7 +189,7 @@ function resolveEditableElementFromTextNode(node){
 
 function enableTextEditing(){
 
-  if (localStorage.getItem('featureEnabled') === 'true') {
+  if (localStorage.getItem('featureEnabled') === 'false') {
     alert("Feature is disabled. Editing is not allowed.");
     return false;
   }
@@ -234,7 +252,7 @@ function onMutations(records){
 ========================================================= */
 function updateOriginalHTMLWithTextChanges(){
 
-  if (localStorage.getItem('featureEnabled') === 'true') {
+  if (localStorage.getItem('featureEnabled') === 'false') {
     alert("Feature is disabled");
     return false;
   }
@@ -300,7 +318,6 @@ function updateOriginalHTMLWithTextChanges(){
   const cleanedOuterHTML="<!DOCTYPE html>\n"+originalDoc.documentElement.outerHTML;
   console.log("=== Final Updated HTML ==="); console.log(cleanedOuterHTML);
   modifiedHTML = "<!DOCTYPE html>\n"+originalDoc.documentElement.outerHTML;
-  alert('=== ✅ Sync Complete ===')
   // try{
   //   const blob=new Blob([cleanedOuterHTML],{type:"text/html"});
   //   const a=document.createElement("a");
@@ -363,7 +380,7 @@ function applyTextUpdate(target,newText){
    SAVE CHANGES TO GITHUB 
 ========================================================= */
 async function saveAndPushChanges() {
-  if (localStorage.getItem('featureEnabled') === 'true') {
+  if (localStorage.getItem('featureEnabled') === 'false') {
     alert("Feature is disabled. Editing is not allowed.");
     return false;
   }
@@ -412,35 +429,12 @@ window.saveAndPushChanges=saveAndPushChanges;
 window.updateOriginalHTMLWithTextChanges=updateOriginalHTMLWithTextChanges;
 
 document.addEventListener('DOMContentLoaded', function () {
-    const projectId = window.location.href;  // Get the full URL
-
-    // Regular expression to check for ?e=t in the query string
-    const regex = /[?&]e=t/;
-
-    if (regex.test(projectId)) {
-        console.log('URL contains ?e=t');
-    } else {
-        console.log('URL does not contain ?e=t');
-    }
-
-    // Fetch the feature flag status from the backend
-    fetch(`/get_status/?project_id=${projectId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (!data.featureEnabled) {
-                console.log("Feature is disabled");
-                return false;  // Stops further actions
-            }
-
-            // If the feature is enabled, proceed with other logic
-            createButtons();
-        })
-        .catch(error => {
-            console.error('Error fetching feature status:', error);
-        });
+    if (localStorage.getItem('featureEnabled') === 'false') {
+    alert("Feature is disabled");
+    return false;
+  }
+    createButtons();
 });
-
-
 
 // Function to dynamically create and append the buttons
 function createButtons() {
