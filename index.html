@@ -80,16 +80,19 @@
             <script src="assets/js/ScrollTrigger.min.js"></script>
             <script src="assets/js/Observer.min.js"></script>
             <script src="assets/js/gsap.effects.js"></script>
-            <script src="assets/commonjs/htmlChanger.js"></script>
+			<script src="assets/commonjs/htmlChanger.js"></script>
 	        <script src="assets/commonjs/enablebutton.js"></script>
+			    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
             <script>
                 var fileName = document.title || "index";
 
                 $(document).ready(function () {
-                loadHeaderFooter("header", "assets/header.html");
-                loadHeaderFooter("footer", "assets/footer.html");
+                loadHeaderFooter("header", "/header.html");
+                loadHeaderFooter("footer", "/footer.html");
                 });
 
                 function loadHeaderFooter(id, file) {
@@ -118,4 +121,7 @@
 
         </body>
         </html>
+
     
+
+
